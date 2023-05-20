@@ -8,10 +8,10 @@ Here, we implement meta-learners (T-, S-, M-, DR-, R-) and different versions (X
 This software is currently in beta, and we expect to make continual improvements to its performance and usability.
 
 ### Experiments and simulations
-All experiments in Acharki et al. (2023) can be replicated using this repository in the fold _Scripts_. The necessary code for each table in the main paper or Supplementary Materials can be reproduced by running to script associated to the experiment (e.g. Lin_Rand_Case1.R in Appendix D1 for Table 5). 
+All experiments in [Acharki et al. (2023)](https://arxiv.org/abs/2205.14714) can be replicated using this repository in the fold _Scripts_. The necessary code for each table in the main paper or Supplementary Materials can be reproduced by running to script associated to the experiment (e.g. Lin_Rand_Case1.R in Appendix D1 for Table 5). 
 
 ### Semi-synthetic datasets:
-In the fold _Datasets_, you can find and upload the following datasets in a zip file:
+In the fold _Datasets_, you can find and upload the following datasets in the zip file _Semi-Synthetic-EGS.zip_ :
 - "Single_Fracture_Simulation_Cases_16200.csv"
 - "Fracture_Efficency.csv"
 - "Main_Dataset.csv"
