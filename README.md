@@ -3,19 +3,15 @@ Code Author: Naoufal Acharki (naoufal.acharki@gmail.com)
 
 This repositery _multipleT-MetaLearners_ contains the code/simulations in R (see Appendices A-D) and the semi-synthetic dataset (described in Appendix E) as detailed in the Supplementary Materials of our the paper [Comparison of meta-learners for estimating multi-valued treatment heterogeneous effects (Acharki et al., 2023)](https://arxiv.org/abs/2205.14714)
 
-Here, we implement different versions and meta-learners
+Here, we implement meta-learners (T-, S-, M-, DR-, R-) and different versions (X- and Naive X-) learners for multi-valued treatments to estimate heterogenous treatments. These implementations can be found in _MetaLearners_tools.R_ in _Scripts_ and the analytical tests presented in the paper (linear model and Hazard rate) are written in each scripts of Appendix_D1 to Appendix_D4.
+
+This software is currently in beta, and we expect to make continual improvements to its performance and usability.
 
 ### Experiments and simulations
-All experiments in Acharki et al. (2023) can be replicated using this repository; the necessary code is in experiments.experiments_AISTATS21. To do so from shell, clone the repo, create a new virtual environment and run
-
-Methods and scripts for the RPIE method are found in the fold R_code, and the analytical tests presented in the paper are can be found in test_functions
-
-
-
-Note that PropensityMatching's methods require the following librairies: _numpy_, _pandas_, _seaborn_, _sklearn_ and _TableOne_.
+All experiments in Acharki et al. (2023) can be replicated using this repository in the fold _Scripts_. The necessary code for each table in the main paper or Supplementary Materials can be reproduced by running to script associated to the experiment (e.g. Lin_Rand_Case1.R in Appendix D1 for Table 5). Do not forget to source  _MetaLearners_tools.R_ in every experiment.
 
 ### Semi-synthetic datasets:
-In _Datasets_, you can find and upload the following datasets in a zip file:
+In the fold _Datasets_, you can find and upload the following datasets in a zip file:
 - "Single_Fracture_Simulation_Cases_16200.csv"
 - "Fracture_Efficency.csv"
 - "Main_Dataset.csv"
