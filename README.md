@@ -14,7 +14,7 @@ Methods and scripts for the RPIE method are found in the fold R_code, and the an
 
 Note that PropensityMatching's methods require the following librairies: _numpy_, _pandas_, _seaborn_, _sklearn_ and _TableOne_.
 
-# Semi-synthetic datasets:
+### Semi-synthetic datasets:
 In _Datasets_, you can find and upload the following datasets in a zip file:
 - "Single_Fracture_Simulation_Cases_16200.csv"
 - "Fracture_Efficency.csv"
@@ -25,10 +25,10 @@ We refer the reader to Appendix E for more details about the physical model used
 ### Citation
 If you use this software or the datasets please cite the corresponding paper(s):
 > @misc{acharki2023comparison,
-      title={Comparison of meta-learners for estimating multi-valued treatment heterogeneous effects}, 
-      author={Naoufal Acharki and Josselin Garnier and Antoine Bertoncello and Ramiro Lugo},
-      year={2023},
-      eprint={2205.14714},
-      archivePrefix={arXiv},
-      primaryClass={stat.ML}
-}
+>      title={Comparison of meta-learners for estimating multi-valued treatment heterogeneous effects}, 
+>      author={Naoufal Acharki and Josselin Garnier and Antoine Bertoncello and Ramiro Lugo},
+>      year={2023},
+>      eprint={2205.14714},
+>      archivePrefix={arXiv},
+>      primaryClass={stat.ML}
+>}
