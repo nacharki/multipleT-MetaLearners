@@ -16,7 +16,7 @@ In the fold _Datasets_, you can find and upload the following datasets in a zip 
 - "Fracture_Efficency.csv"
 - "Main_Dataset.csv"
 
-We refer the reader to Appendix E for more details about the physical model used to generate this dataset and how it can be useful for further use/application in Causal Inference. An example of the use of this semi-synthetic dataset, the creation of a non-randomized biased dataset, is described in Appendix E and can be found in _Scripts/Appendix_EGS/EGS_CATE.
+We refer the reader to Appendix E for more details about the physical model used to generate this dataset and how it can be useful for further use/application in Causal Inference. An example of the use of this semi-synthetic dataset, the creation of a non-randomized biased dataset, is described in Appendix E and can be found in _Scripts/Appendix_EGS/EGS_CATE_.
 
 ### Citation
 If you use this software or the datasets please cite the corresponding paper(s):
