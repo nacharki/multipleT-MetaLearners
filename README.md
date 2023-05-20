@@ -25,12 +25,12 @@ We refer the reader to Appendix E for more details about the physical model used
 ### Citation
 If you use this software or the datasets please cite the corresponding paper(s):
 ```
-> @misc{acharki2023comparison,
->      title={Comparison of meta-learners for estimating multi-valued treatment heterogeneous effects}, 
->      author={Naoufal Acharki and Josselin Garnier and Antoine Bertoncello and Ramiro Lugo},
->      year={2023},
->      eprint={2205.14714},
->      archivePrefix={arXiv},
->      primaryClass={stat.ML}
->}
+@misc{acharki2023comparison,
+      title={Comparison of meta-learners for estimating multi-valued treatment heterogeneous effects}, 
+      author={Naoufal Acharki and Josselin Garnier and Antoine Bertoncello and Ramiro Lugo},
+      year={2023},
+      eprint={2205.14714},
+      archivePrefix={arXiv},
+      primaryClass={stat.ML}
+}
 ```
