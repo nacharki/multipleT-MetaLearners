@@ -1,5 +1,4 @@
 # Import libraries and dataset
-setwd("C:/Users/J0521353/OneDrive - TOTAL/Causal Inference - Synthetic data")
 library(dplyr)
 library(reshape2)
 library(randomForest)
@@ -18,6 +17,10 @@ PEHE <- function(hat_tau, X, t){
 
 mPEHE <- function(PEHE){
   return(sqrt(mean(PEHE)))
+}
+
+sdPEHE <- function(PEHE){
+  return(sqrt(sd(PEHE)))
 }
 
 K_GPS_norm <- function(x){
@@ -66,6 +69,10 @@ for(k in 2:K){
 mPEHE_T = mPEHE(PEHE_T)
 mPEHE_T
 
+sdPEHE_T = sdPEHE(PEHE_T)
+sdPEHE_T
+
+
 # S_learner : 
 S.Fit = S_Learner(as.data.frame(X), Y, W, model = "xgboost")
 
@@ -81,6 +88,10 @@ for(k in 2:K){
 }
 mPEHE_S = mPEHE(PEHE_S)
 mPEHE_S
+
+
+sdPEHE_S = sdPEHE(PEHE_S)
+sdPEHE_S
 
 
 # GPS estimation
@@ -99,6 +110,11 @@ for(k in 2:K){
 mPEHE_nvX = mPEHE(PEHE_nvX)
 mPEHE_nvX
 
+
+sdPEHE_nvX = sdPEHE(PEHE_nvX)
+sdPEHE_nvX
+
+
 # M_learner
 M.Fit = M_Learner(X, Y, W, r_hat, model = "xgboost")
 
@@ -114,6 +130,10 @@ for(k in 2:K){
 
 mPEHE_M = mPEHE(PEHE_M)
 mPEHE_M
+
+sdPEHE_M = sdPEHE(PEHE_M)
+sdPEHE_M
+
 
 # DR_learner with regT-learning nuisance
 mu_T = rep(0, n)
@@ -140,6 +160,10 @@ for(k in 2:K){
 mPEHE_DR = mPEHE(PEHE_DR)
 mPEHE_DR
 
+sdPEHE_DR = sdPEHE(PEHE_DR)
+sdPEHE_DR
+
+
 
 # X_learner with regT-learning
 X.Fit = X_Learner(X, Y, W, mu_hat, model = "xgboost")
@@ -156,6 +180,10 @@ for(k in 2:K){
 
 mPEHE_X = mPEHE(PEHE_X)
 mPEHE_X
+
+sdPEHE_X = sdPEHE(PEHE_X)
+sdPEHE_X
+
 
 # DR_learner with S-learning nuisance
 mu_T = rep(0, n)
@@ -181,6 +209,10 @@ for(k in 2:K){
 mPEHE_DR = mPEHE(PEHE_DR)
 mPEHE_DR
 
+sdPEHE_DR = sdPEHE(PEHE_DR)
+sdPEHE_DR
+
+
 # X_learner with S-learning
 X.Fit = X_Learner(X, Y, W, mu_hat, model = "xgboost")
 
@@ -197,6 +229,8 @@ for(k in 2:K){
 mPEHE_X = mPEHE(PEHE_X)
 mPEHE_X
 
+sdPEHE_X = sdPEHE(PEHE_X)
+sdPEHE_X
 
 # R_learner linear family
 y_fit = xgboost(data = as.matrix(sapply(X, as.numeric)), label = Y, nrounds = 100,  verbose = F)
@@ -219,12 +253,16 @@ for(k in 2:K){
 mPEHE_R = mPEHE(PEHE_R)
 mPEHE_R
 
+sdPEHE_R = sdPEHE(PEHE_R)
+sdPEHE_R
+
+
 data.frame(mPEHE_T = mPEHE_T, mPEHE_S = mPEHE_S, mPEHE_nvX = mPEHE_nvX, mPEHE_M = mPEHE_M,
            mPEHE_DR = mPEHE_DR, mPEHE_X = mPEHE_X, mPEHE_Rlin = mPEHE_R)
 
 ########################### Setting 2 : Draw results for RandomForest ###################
 
-# T_learner : 
+# T_learner :
 T.Fit = T_Learner(as.data.frame(X), Y, W, model = "randomForest")
 
 T_hat = list()
@@ -238,6 +276,10 @@ for(k in 2:K){
 }
 mPEHE_T = mPEHE(PEHE_T)
 mPEHE_T
+
+sdPEHE_T = sdPEHE(PEHE_T)
+sdPEHE_T
+
 
 # S_learner : 
 S.Fit = S_Learner(as.data.frame(X), Y, W, model = "randomForest")
@@ -255,8 +297,13 @@ for(k in 2:K){
 mPEHE_S = mPEHE(PEHE_S)
 mPEHE_S
 
+
+sdPEHE_S = sdPEHE(PEHE_S)
+sdPEHE_S
+
+
 # Naive X_learner : 
-nvX_hat = nvX_Learner(as.matrix(X), Y, W, r_hat, T.Fit, model = "randomForest")
+nvX_hat = nvX_Learner(as.data.frame(X), Y, W, r_hat, T.Fit, model = "randomForest")
 
 PEHE_nvX = c()
 for(k in 2:K){
@@ -264,6 +311,11 @@ for(k in 2:K){
 }
 mPEHE_nvX = mPEHE(PEHE_nvX)
 mPEHE_nvX
+
+
+sdPEHE_nvX = sdPEHE(PEHE_nvX)
+sdPEHE_nvX
+
 
 # M_learner
 M.Fit = M_Learner(X, Y, W, r_hat, model = "randomForest")
@@ -281,24 +333,11 @@ for(k in 2:K){
 mPEHE_M = mPEHE(PEHE_M)
 mPEHE_M
 
-# regularized T_learner :
-weights = (1/K)/r_hat
-regT.Fit = T_Learner(as.data.frame(X), Y, W, model = "randomForest", weights = weights)
-
-regT_hat = list()
-for(k in 1:K){
-  regT_hat[[k]] = predict(regT.Fit[[k]], as.matrix(X))
-}
-
-PEHE_regT = c()
-for(k in 2:K){
-  PEHE_regT= c(PEHE_regT, PEHE(regT_hat[[k]] - regT_hat[[1]], X, W.levels[k]))
-}
-mPEHE_regT = mPEHE(PEHE_regT)
-mPEHE_regT
+sdPEHE_M = sdPEHE(PEHE_M)
+sdPEHE_M
 
 
-# DR_learner with T-learning nuisance
+# DR_learner with regT-learning nuisance
 mu_T = rep(0, n)
 mu_hat = data.frame(mu_T = mu_T)
 for(k in 1:K){
@@ -323,6 +362,10 @@ for(k in 2:K){
 mPEHE_DR = mPEHE(PEHE_DR)
 mPEHE_DR
 
+sdPEHE_DR = sdPEHE(PEHE_DR)
+sdPEHE_DR
+
+
 
 # X_learner with regT-learning
 X.Fit = X_Learner(X, Y, W, mu_hat, model = "randomForest")
@@ -339,6 +382,10 @@ for(k in 2:K){
 
 mPEHE_X = mPEHE(PEHE_X)
 mPEHE_X
+
+sdPEHE_X = sdPEHE(PEHE_X)
+sdPEHE_X
+
 
 # DR_learner with S-learning nuisance
 mu_T = rep(0, n)
@@ -364,6 +411,10 @@ for(k in 2:K){
 mPEHE_DR = mPEHE(PEHE_DR)
 mPEHE_DR
 
+sdPEHE_DR = sdPEHE(PEHE_DR)
+sdPEHE_DR
+
+
 # X_learner with S-learning
 X.Fit = X_Learner(X, Y, W, mu_hat, model = "randomForest")
 
@@ -380,6 +431,8 @@ for(k in 2:K){
 mPEHE_X = mPEHE(PEHE_X)
 mPEHE_X
 
+sdPEHE_X = sdPEHE(PEHE_X)
+sdPEHE_X
 
 # R_learner linear family
 y_fit = randomForest(x = as.matrix(X), y = Y)
@@ -402,6 +455,10 @@ for(k in 2:K){
 mPEHE_R = mPEHE(PEHE_R)
 mPEHE_R
 
+sdPEHE_R = sdPEHE(PEHE_R)
+sdPEHE_R
+
+
 
 
 ########################### Setting 1 : Draw results for linear model ###################
@@ -422,6 +479,9 @@ for(k in 2:K){
 mPEHE_T = mPEHE(PEHE_T)
 mPEHE_T
 
+sdPEHE_T = sdPEHE(PEHE_T)
+sdPEHE_T
+
 # S_learner : 
 S.Fit = S_Learner(as.data.frame(X), Y, W, model = "lm", p = 2)
 
@@ -438,6 +498,8 @@ for(k in 2:K){
 mPEHE_S = mPEHE(PEHE_S)
 mPEHE_S
 
+sdPEHE_S = sdPEHE(PEHE_S)
+sdPEHE_S
 # Naive X_learner : 
 nvX_hat = nvX_Learner(as.matrix(X), Y, W, r_hat, T.Fit, model = "lm", p = 2)
 
@@ -449,6 +511,8 @@ for(k in 2:K){
 mPEHE_nvX = mPEHE(PEHE_nvX)
 mPEHE_nvX
 
+sdPEHE_nvX = sdPEHE(PEHE_nvX)
+sdPEHE_nvX
 
 # M_learner
 M.Fit = M_Learner(X, Y, W, r_hat, model = "lm", p = 2)
@@ -465,21 +529,8 @@ for(k in 2:K){
 mPEHE_M = mPEHE(PEHE_M)
 mPEHE_M
 
-# regularized T_learner :
-weights = (1/K)/r_hat
-regT.Fit = T_Learner(as.data.frame(X), Y, W, model = "lm", weights = weights, p = 2)
-
-regT_hat = list()
-for(k in 1:K){
-  regT_hat[[k]] = as.matrix(data.frame(Intercept = rep(1, nrow(dataset)), polym( as.matrix(X), degree = 2, raw=T))) %*% regT.Fit[[k]]$coefficients
-}
-
-PEHE_regT = c()
-for(k in 2:K){
-  PEHE_regT= c(PEHE_regT, PEHE(regT_hat[[k]] - regT_hat[[1]], X, W.levels[k]))
-}
-mPEHE_regT = mPEHE(PEHE_regT)
-mPEHE_regT
+sdPEHE_M = sdPEHE(PEHE_M)
+sdPEHE_M
 
 
 # DR_learner with T-learning nuisance
@@ -505,6 +556,9 @@ for(k in 2:K){
 mPEHE_DR = mPEHE(PEHE_DR)
 mPEHE_DR
 
+sdPEHE_DR = sdPEHE(PEHE_DR)
+sdPEHE_DR
+
 # X_learner with T-learning nuisance
 X.Fit = X_Learner(as.matrix(X), Y, W, mu_hat, model = "lm", p = 2)
 
@@ -519,6 +573,9 @@ for(k in 2:K){
 }
 mPEHE_X = mPEHE(PEHE_X)
 mPEHE_X
+
+sdPEHE_X = sdPEHE(PEHE_X)
+sdPEHE_X
 
 # DR_learner with S-learning nuisance
 mu_T = rep(0, n)
@@ -544,6 +601,9 @@ for(k in 2:K){
 mPEHE_DR = mPEHE(PEHE_DR)
 mPEHE_DR
 
+sdPEHE_DR = sdPEHE(PEHE_DR)
+sdPEHE_DR
+
 # X_learner with S-learning nuisance
 X.Fit = X_Learner(as.matrix(X), Y, W, mu_hat, model = "lm", p = 2)
 
@@ -558,6 +618,9 @@ for(k in 2:K){
 }
 mPEHE_X = mPEHE(PEHE_X)
 mPEHE_X
+
+sdPEHE_X = sdPEHE(PEHE_X)
+sdPEHE_X
 
 # R_learner linear family
 y_fit = lm(Y ~ polym( as.matrix(X), degree = 2, raw=T))
@@ -579,6 +642,9 @@ for(k in 2:K){
 
 mPEHE_R = mPEHE(PEHE_R)
 mPEHE_R
+
+sdPEHE_R = sdPEHE(PEHE_R)
+sdPEHE_R
 
 data.frame(mPEHE_T = mPEHE_T, mPEHE_S = mPEHE_S, mPEHE_nvX = mPEHE_nvX, mPEHE_M = mPEHE_M,
            mPEHE_DR = mPEHE_DR, mPEHE_X = mPEHE_X, mPEHE_Rlin = mPEHE_R)

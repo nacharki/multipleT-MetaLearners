@@ -1,5 +1,4 @@
 # Import libraries and dataset
-setwd("C:/Users/J0521353/OneDrive - TOTAL/Causal Inference - Synthetic data")
 library(dplyr)
 library(reshape2)
 library(randomForest)
@@ -18,6 +17,10 @@ PEHE <- function(hat_tau, X, t){
 
 mPEHE <- function(PEHE){
   return(sqrt(mean(PEHE)))
+}
+
+sdPEHE <- function(PEHE){
+  return(sqrt(sd(PEHE)))
 }
 
 K_GPS_norm <- function(x){
@@ -68,6 +71,9 @@ for(k in 2:K){
 mPEHE_M = mPEHE(PEHE_M)
 mPEHE_M
 
+sdPEHE_M = sdPEHE(PEHE_M)
+sdPEHE_M
+
 # DR_learner
 mu_T = rep(0, n)
 mu_hat = data.frame(mu_T = apply(data.frame(W, X), 1, outcome))
@@ -90,6 +96,10 @@ for(k in 2:K){
 mPEHE_DR = mPEHE(PEHE_DR)
 mPEHE_DR
 
+sdPEHE_DR = sdPEHE(PEHE_DR)
+sdPEHE_DR
+
+
 # X_learner
 X.Fit = X_Learner(X, Y, W, mu_hat, model = "xgboost")
 
@@ -105,6 +115,10 @@ for(k in 2:K){
 
 mPEHE_X = mPEHE(PEHE_X)
 mPEHE_X
+
+sdPEHE_X = sdPEHE(PEHE_X)
+sdPEHE_X
+
 
 # R_learner linear family
 m_hat =  apply(X, 1, m_true)
@@ -124,6 +138,10 @@ for(k in 2:K){
 
 mPEHE_R = mPEHE(PEHE_R)
 mPEHE_R
+
+sdPEHE_R = sdPEHE(PEHE_R)
+sdPEHE_R
+
 
 data.frame(mPEHE_M = mPEHE_M, mPEHE_DR = mPEHE_DR, mPEHE_X = mPEHE_X)
 
@@ -146,6 +164,9 @@ for(k in 2:K){
 mPEHE_M = mPEHE(PEHE_M)
 mPEHE_M
 
+sdPEHE_M = sdPEHE(PEHE_M)
+sdPEHE_M
+
 # DR_learner
 DR.Fit = DR_Learner(as.matrix(X), Y, W, r_hat, mu_hat, model = "randomForest")
 
@@ -162,6 +183,9 @@ for(k in 2:K){
 mPEHE_DR = mPEHE(PEHE_DR)
 mPEHE_DR
 
+sdPEHE_DR = sdPEHE(PEHE_DR)
+sdPEHE_DR
+
 # X_learner
 X.Fit = X_Learner(as.matrix(X), Y, W, mu_hat, model = "randomForest")
 
@@ -177,6 +201,9 @@ for(k in 2:K){
 
 mPEHE_X = mPEHE(PEHE_X)
 mPEHE_X
+
+sdPEHE_X = sdPEHE(PEHE_X)
+sdPEHE_X
 
 data.frame(mPEHE_M = mPEHE_M, mPEHE_DR = mPEHE_DR, mPEHE_X = mPEHE_X)
 
@@ -197,6 +224,9 @@ for(k in 2:K){
 mPEHE_M = mPEHE(PEHE_M)
 mPEHE_M
 
+sdPEHE_M = sdPEHE(PEHE_M)
+sdPEHE_M
+
 # DR_learner
 DR.Fit = DR_Learner(as.matrix(X), Y, W, r_hat, mu_hat, model = "lm", p = 2)
 
@@ -212,6 +242,10 @@ for(k in 2:K){
 mPEHE_DR = mPEHE(PEHE_DR)
 mPEHE_DR
 
+sdPEHE_DR = sdPEHE(PEHE_DR)
+sdPEHE_DR
+
+
 # X_learner
 X.Fit = X_Learner(as.matrix(X), Y, W, mu_hat, model = "lm", p = 2)
 
@@ -226,5 +260,9 @@ for(k in 2:K){
 }
 mPEHE_X = mPEHE(PEHE_X)
 mPEHE_X
+
+sdPEHE_X = sdPEHE(PEHE_X)
+sdPEHE_X
+
 
 data.frame(mPEHE_M = mPEHE_M, mPEHE_DR = mPEHE_DR, mPEHE_X = mPEHE_X)
