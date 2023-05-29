@@ -23,7 +23,7 @@ If you use this software or the datasets please cite the corresponding paper(s):
 ```
 @misc{acharki2023comparison,
       title={Comparison of meta-learners for estimating multi-valued treatment heterogeneous effects}, 
-      author={Naoufal Acharki and Josselin Garnier and Antoine Bertoncello and Ramiro Lugo},
+      author={Naoufal Acharki and Ramiro Lugo and Antoine Bertoncello and Josselin Garnier},
       year={2023},
       eprint={2205.14714},
       archivePrefix={arXiv},
